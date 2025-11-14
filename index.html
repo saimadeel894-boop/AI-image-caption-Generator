@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Image Caption Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.21.0/dist/tf.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.0"
+      defer
+    ></script>
+    <script type="module" src="./script.js" defer></script>
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Vision + Language</p>
+          <h1>AI Image Caption Generator</h1>
+          <p class="lede">
+            Upload a photo or paste an image URL and let a lightweight on-device
+            model come up with a short natural-language caption. No backend, no
+            API keys, everything runs in your browser.
+          </p>
+        </div>
+        <div class="hero-pill">
+          <span class="dot"></span>
+          <span>Powered by TensorFlow.js MobileNet</span>
+        </div>
+      </header>
+
+      <main class="panel-grid">
+        <section class="upload card">
+          <h2>1. Provide an Image</h2>
+          <p>Drag & drop, browse, or use a demo image.</p>
+          <label class="dropzone" id="dropzone">
+            <input type="file" accept="image/*" id="fileInput" hidden />
+            <div class="dropzone-content">
+              <span class="emoji">🖼️</span>
+              <p>Drop an image here or click to browse</p>
+              <small>PNG, JPG, GIF up to 5 MB</small>
+            </div>
+          </label>
+          <div class="input-row">
+            <input
+              type="url"
+              id="imageUrl"
+              placeholder="Or paste an image URL…"
+            />
+            <button id="loadUrlBtn" type="button">Load</button>
+          </div>
+          <div class="demo-row">
+            <button class="ghost" data-demo="scenic">Try Scenic Demo</button>
+            <button class="ghost" data-demo="food">Try Food Demo</button>
+            <button class="ghost" data-demo="pet">Try Pet Demo</button>
+          </div>
+        </section>
+
+        <section class="preview card">
+          <h2>2. Preview</h2>
+          <div class="preview-frame">
+            <img id="previewImage" src="" alt="Preview" />
+            <p class="placeholder">No image selected yet</p>
+          </div>
+          <button id="captionBtn" class="primary" disabled>
+            Generate Caption
+          </button>
+          <p class="status" id="status"></p>
+        </section>
+
+        <section class="results card">
+          <h2>3. Captions</h2>
+          <div class="latest">
+            <p class="label">Latest</p>
+            <p id="captionText">Waiting for your image…</p>
+          </div>
+          <div class="confidence">
+            <span>Confidence</span>
+            <div class="bar">
+              <div id="confidenceBar"></div>
+            </div>
+            <span id="confidenceValue">0%</span>
+          </div>
+          <div class="history">
+            <p class="label">History</p>
+            <ul id="historyList"></ul>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        Crafted with ❤️ using TensorFlow.js. Models run entirely client-side so
+        your images never leave the browser.
+      </footer>
+    </div>
+  </body>
+</html>
+
